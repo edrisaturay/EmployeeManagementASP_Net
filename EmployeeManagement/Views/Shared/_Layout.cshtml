@@ -41,10 +41,7 @@
         <div>
             @RenderBody()
         </div>
-        @if (IsSectionDefined("Scripts"))
-        {
-            @RenderSection("Scripts", false)
-        }
+
     </div>
     <environment include="Development">
         <script src="~/lib/jquery/jquery.js"></script>
@@ -81,7 +78,11 @@
                 asp-fallback-test-value="absolute"
                 asp-supress-fallback-integrity="true"></script>
     </environment>
-  
+
     <script src="~/js/custom.js"></script>
+    @if (IsSectionDefined("Scripts"))
+    {
+        @RenderSection("Scripts", false)
+    }
 </body>
 </html>
