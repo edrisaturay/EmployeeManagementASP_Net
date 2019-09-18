@@ -28,3 +28,4 @@ C:\Users\Edrisa A. Turay\source\repos\EmployeeManagement\EmployeeManagement\obj\
 C:\Users\Edrisa A. Turay\source\repos\EmployeeManagement\EmployeeManagement\obj\Debug\netcoreapp2.1\Razor\Views\_ViewImports.g.cshtml.cs
 C:\Users\Edrisa A. Turay\source\repos\EmployeeManagement\EmployeeManagement\obj\Debug\netcoreapp2.1\Razor\Views\_ViewStart.g.cshtml.cs
 C:\Users\Edrisa A. Turay\source\repos\EmployeeManagement\EmployeeManagement\obj\Debug\netcoreapp2.1\Razor\Views\Home\Create.g.cshtml.cs
+C:\Users\Edrisa A. Turay\source\repos\EmployeeManagement\EmployeeManagement\obj\Debug\netcoreapp2.1\Razor\Views\Home\Edit.g.cshtml.cs

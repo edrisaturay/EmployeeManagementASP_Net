@@ -2,3 +2,12 @@
   width: 75px;
 }
 
+.image-thumbnail {
+  height: 200px;
+}
+
+div.card-3 {
+  min-width: 18rem;
+  max-width: 30.5%;
+}
+
