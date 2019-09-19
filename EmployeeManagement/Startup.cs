@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EmployeeManagement.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,7 +35,24 @@ namespace EmployeeManagement
                     )
                 )
             );
-            services.AddMvc().AddXmlSerializerFormatters();
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 8;
+                options.Password.RequiredUniqueChars = 2;
+            })
+                .AddEntityFrameworkStores<AppDBContext>();
+            //services.Configure<IdentityOptions>(options =>
+            //{
+                //options.Password.RequiredLength = 8;
+                //options.Password.RequiredUniqueChars = 2;
+            //});
+            services.AddMvc(options =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                .Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
+            }).AddXmlSerializerFormatters();
             services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
             //services.AddTransient<IEmployeeRepository, MockEmployeeRepository>();
             //services.AddScoped<IEmployeeRepository, MockEmployeeRepository>();
@@ -50,6 +70,11 @@ namespace EmployeeManagement
 
                 app.UseDeveloperExceptionPage(developerExceptionPageOptions);
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
+            }
 
             //overriding the default file name
             //DefaultFilesOptions defaultFilesOptions = new DefaultFilesOptions();
@@ -57,6 +82,7 @@ namespace EmployeeManagement
             //defaultFilesOptions.DefaultFileNames.Add("foo.html"); //specifying the default file to load
             //app.UseDefaultFiles(defaultFilesOptions);
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
@@ -69,11 +95,11 @@ namespace EmployeeManagement
             //fileServerOptions.DefaultFilesOptions.DefaultFileNames.Add("foo.html");
             //app.UseFileServer();
 
-            app.Run(async (context) =>
-            {
+            //app.Run(async (context) =>
+            //{
                 //throw new Exception("Some error processing the request");
-                await context.Response.WriteAsync("Hello from the other side");
-            });
+              //m  await context.Response.WriteAsync("Hello from the other side");
+            //});
 
             
         }

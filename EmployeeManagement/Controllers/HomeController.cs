@@ -1,7 +1,9 @@
 ﻿using EmployeeManagement.Models;
 using EmployeeManagement.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,11 +17,17 @@ namespace EmployeeManagement.Controllers
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IHostingEnvironment hostingEnvironment;
+        private readonly ILogger logger;
 
-        public HomeController(IEmployeeRepository employeeRepository, IHostingEnvironment hostingEnvironment)
+        public HomeController(IEmployeeRepository employeeRepository, 
+            IHostingEnvironment hostingEnvironment,
+            ILogger<HomeController> logger)
         {
+            
+            
             _employeeRepository = employeeRepository;
             this.hostingEnvironment = hostingEnvironment;
+            this.logger = logger;
         }
 
         //[Route("~/")]
@@ -33,9 +41,20 @@ namespace EmployeeManagement.Controllers
         //[Route("{id?}")]
         public ViewResult Details(int? id)
         {
+            //throw new Exception("Error in details view");
+            logger.LogTrace("Trace");
+            logger.LogDebug("Debug log");
+            logger.LogInformation("Information Log");
+            logger.LogWarning("Warning Log");
+            Employee employee = _employeeRepository.GetEmployee(id.Value);
+            if(employee == null)
+            {
+                Response.StatusCode = 404;
+                return View("EmployeeNotFound", id.Value);
+            }
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
-                Employee = _employeeRepository.GetEmployee(id??1),
+                Employee = employee, //_employeeRepository.GetEmployee(id??1),
                 PageTitle = "Employee Details"
             };
             return View(homeDetailsViewModel);
@@ -75,6 +94,11 @@ namespace EmployeeManagement.Controllers
         public ViewResult Edit( int id )
         {
             Employee employee = _employeeRepository.GetEmployee(id);
+            if(employee == null)
+            {
+                Response.StatusCode = 404;
+                return View("EmployeeNotFound", id);
+            }
             EmployeeEditViewModel employeeEditViewModel = new EmployeeEditViewModel
             {
                 Id = employee.Id,
@@ -132,6 +156,4 @@ namespace EmployeeManagement.Controllers
             return uniqueFileName;
         }
     }
-
-
 }

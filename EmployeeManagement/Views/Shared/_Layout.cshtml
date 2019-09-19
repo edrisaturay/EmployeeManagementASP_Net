@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+@inject SignInManager<IdentityUser> signInManager;
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -17,7 +19,7 @@
               crossorigin="anonymous">
     </environment>
     <link href="~/css/style.css" rel="stylesheet" />
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.PageTitle</title>
 </head>
 <body>
     <div class="container">
@@ -34,6 +36,26 @@
                     <li class="nav-item">
                         <a asp-controller="home" asp-action="create" class="nav-link">Create</a>
                     </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <form method="post" asp-action="logout" asp-controller="account">
+                                <button type="submit" class="nav-link btn btn-link py-0" style="width:auto;">Logout @User.Identity.Name</button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a asp-controller="account" asp-action="register" class="nav-link">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="account" asp-action="login" class="nav-link">Login</a>
+                        </li>
+                    }
+
                 </ul>
             </div>
         </nav>

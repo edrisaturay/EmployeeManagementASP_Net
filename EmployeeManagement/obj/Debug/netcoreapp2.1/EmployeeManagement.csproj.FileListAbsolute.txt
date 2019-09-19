@@ -29,3 +29,9 @@ C:\Users\Edrisa A. Turay\source\repos\EmployeeManagement\EmployeeManagement\obj\
 C:\Users\Edrisa A. Turay\source\repos\EmployeeManagement\EmployeeManagement\obj\Debug\netcoreapp2.1\Razor\Views\_ViewStart.g.cshtml.cs
 C:\Users\Edrisa A. Turay\source\repos\EmployeeManagement\EmployeeManagement\obj\Debug\netcoreapp2.1\Razor\Views\Home\Create.g.cshtml.cs
 C:\Users\Edrisa A. Turay\source\repos\EmployeeManagement\EmployeeManagement\obj\Debug\netcoreapp2.1\Razor\Views\Home\Edit.g.cshtml.cs
+C:\Users\Edrisa A. Turay\source\repos\EmployeeManagement\EmployeeManagement\obj\Debug\netcoreapp2.1\Razor\Views\Home\EmployeeNotFound.g.cshtml.cs
+C:\Users\Edrisa A. Turay\source\repos\EmployeeManagement\EmployeeManagement\obj\Debug\netcoreapp2.1\Razor\Views\Shared\NotFound.g.cshtml.cs
+C:\Users\Edrisa A. Turay\source\repos\EmployeeManagement\EmployeeManagement\obj\Debug\netcoreapp2.1\Razor\Views\Shared\Error.g.cshtml.cs
+C:\Users\Edrisa A. Turay\source\repos\EmployeeManagement\EmployeeManagement\bin\Debug\netcoreapp2.1\nlog.config
+C:\Users\Edrisa A. Turay\source\repos\EmployeeManagement\EmployeeManagement\obj\Debug\netcoreapp2.1\Razor\Views\Account\Register.g.cshtml.cs
+C:\Users\Edrisa A. Turay\source\repos\EmployeeManagement\EmployeeManagement\obj\Debug\netcoreapp2.1\Razor\Views\Account\Login.g.cshtml.cs
