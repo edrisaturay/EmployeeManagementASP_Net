@@ -49,8 +49,7 @@ namespace EmployeeManagement.Controllers
             Employee employee = _employeeRepository.GetEmployee(id.Value);
             if(employee == null)
             {
-                Response.StatusCode = 404;
-                return View("EmployeeNotFound", id.Value);
+                return NotFound(id.Value);
             }
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
@@ -154,6 +153,23 @@ namespace EmployeeManagement.Controllers
             }
 
             return uniqueFileName;
+        }
+
+        [HttpPost, ActionName("Delete")]
+        private ViewResult Delete(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound(id.Value);
+            }
+            _employeeRepository.Delete(id.Value);
+            return View("Index");
+        }
+
+        private ViewResult NotFound(int id)
+        {
+            Response.StatusCode = 404;
+            return View("EmployeeNotFound", id);
         }
     }
 }
